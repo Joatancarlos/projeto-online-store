@@ -47,6 +47,10 @@ class Home extends React.Component {
             Carrinho de Compras
           </Link>
         </div>
+        <Categories />
+        {
+
+        }
         {
           query.length > 0
             ? (
@@ -77,7 +81,6 @@ class Home extends React.Component {
             )))
             : (searched && (<p>Nenhum produto foi encontrado</p>))
         }
-        <Categories />
       </>
     );
   }
