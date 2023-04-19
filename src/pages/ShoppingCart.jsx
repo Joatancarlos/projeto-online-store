@@ -2,11 +2,11 @@ import React from 'react';
 
 class ShoppingCart extends React.Component {
   state = {
-  cart: '',
-};
+    cart: '',
+  };
 
-render() {
-  const { cart } = this.state;
+  render() {
+    const { cart } = this.state;
     return (
       <>
         <div />
@@ -22,8 +22,8 @@ render() {
             )
         }
       </>
-  );
-}
+    );
+  }
 }
 
 export default ShoppingCart;
