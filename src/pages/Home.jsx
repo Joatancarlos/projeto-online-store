@@ -50,9 +50,6 @@ class Home extends React.Component {
         </div>
         <Categories />
         {
-
-        }
-        {
           query.length > 0
             ? (
               <p> </p>
