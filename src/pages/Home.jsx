@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories/Categories';
 
+
 class Home extends React.Component {
   state = {
     query: '',
