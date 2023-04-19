@@ -1,4 +1,5 @@
 import React from 'react';
+import Categories from './Categories/Categories';
 // import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 
 class Home extends React.Component {
@@ -35,6 +36,7 @@ class Home extends React.Component {
               </p>
             )
         }
+        <Categories />
       </>
     );
   }
