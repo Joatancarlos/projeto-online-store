@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Categories from './Categories/Categories';
 
 class Home extends React.Component {
   state = {
@@ -46,6 +47,7 @@ class Home extends React.Component {
             Carrinho de Compras
           </Link>
         </div>
+        <Categories />
         {
           query.length > 0
             ? (
