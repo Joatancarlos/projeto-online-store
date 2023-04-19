@@ -1,14 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Categories from './Categories/Categories';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends React.Component {
   state = {
     query: '',
+    category: undefined,
+    categoryList: [],
     products: [],
     searched: false,
   };
+
+  componentDidMount() {
+    this.fetchCategoryList();
+  }
 
   handleChange = ({ target }) => {
     const { name } = target;
@@ -16,14 +21,24 @@ class Home extends React.Component {
     this.setState({ [name]: value });
   };
 
-  handleClick = async () => {
-    const { query } = this.state;
-    const produtos = await getProductsFromCategoryAndQuery(undefined, query);
+  handleSearch = async () => {
+    const { query, category } = this.state;
+    const produtos = await getProductsFromCategoryAndQuery(category, query);
     this.setState({ products: produtos.results, searched: true });
   };
 
+  fetchCategoryList = () => {
+    getCategories().then((response) => {
+      this.setState({
+        categoryList: response,
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+
   render() {
-    const { query, products, searched } = this.state;
+    const { query, products, searched, categoryList } = this.state;
     return (
       <>
         {/* Requisito 2 - Listagem de produtos */}
@@ -39,7 +54,7 @@ class Home extends React.Component {
           </label>
           <button
             data-testid="query-button"
-            onClick={ () => this.handleClick() }
+            onClick={ () => this.handleSearch() }
           >
             Pesquisar
           </button>
@@ -47,7 +62,27 @@ class Home extends React.Component {
             Carrinho de Compras
           </Link>
         </div>
-        <Categories />
+        <p>Categorias:</p>
+        <ul>
+          {
+            categoryList.map((category) => (
+              <li key={ category.id }>
+                <label
+                  data-testid="category"
+                  htmlFor={ `${category.id}` }
+                >
+                  <input
+                    type="radio"
+                    value={ `${category.name}` }
+                    name="category"
+                    onChange={ this.handleChange }
+                  />
+                  { `${category.name}` }
+                </label>
+              </li>
+            ))
+          }
+        </ul>
         {
           query.length > 0
             ? (
@@ -58,20 +93,18 @@ class Home extends React.Component {
               </p>
             )
         }
-
         {
           products.length > 0
             ? (products.map((produto) => (
-              <div key={ produto.id }>
-                <h4 data-testid="product">
+              <div key={ produto.id } data-testid="product">
+                <h4>
                   { produto.title }
                 </h4>
                 <img
-                  data-testid="product"
                   src={ produto.thumbnail }
                   alt={ produto.title }
                 />
-                <h4 data-testid="product">
+                <h4>
                   { produto.price }
                 </h4>
               </div>
