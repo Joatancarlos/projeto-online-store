@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import '../Home.css';
 
 class Home extends React.Component {
   state = {
@@ -15,11 +16,6 @@ class Home extends React.Component {
     this.fetchCategoryList();
   }
 
-  shouldComponentUpdate() {
-    this.handleSearch();
-    return true;
-  }
-
   handleChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -30,6 +26,20 @@ class Home extends React.Component {
     const { query, category } = this.state;
     const produtos = await getProductsFromCategoryAndQuery(category, query);
     this.setState({ products: produtos.results, searched: true });
+  };
+
+  handleClickRatio = ({ target: { id } }) => {
+    this.setState({ category: id, query: '' }, async () => {
+      await this.handleSearch();
+    });
+  };
+
+  add2Cart = async (product) => {
+    let cartArray = [];
+    const cart = localStorage.getItem('cart');
+    if (cart) { cartArray = JSON.parse(cart); }
+    cartArray.push(product);
+    localStorage.setItem('cart', JSON.stringify(cartArray));
   };
 
   fetchCategoryList = () => {
@@ -74,15 +84,16 @@ class Home extends React.Component {
               <li key={ category.id }>
                 <label
                   data-testid="category"
-                  htmlFor="category"
+                  htmlFor={ category.id }
                 >
                   <input
                     type="radio"
                     value={ `${category.name}` }
                     name="category"
-                    onChange={ this.handleChange }
+                    id={ category.id }
+                    onClick={ this.handleClickRatio }
                   />
-                  { `${category.name}` }
+                  {`${category.name}`}
                 </label>
               </li>
             ))
@@ -101,17 +112,25 @@ class Home extends React.Component {
         {
           products.length > 0
             ? (products.map((produto) => (
-              <div key={ produto.id } data-testid="product">
-                <h4>
-                  { produto.title }
-                </h4>
-                <img
-                  src={ produto.thumbnail }
-                  alt={ produto.title }
-                />
-                <h4>
-                  { produto.price }
-                </h4>
+              <div key={ produto.id } data-testid="product" className="product">
+                <Link to="/detalhes-do-produto">
+                  <h4>
+                    {produto.title}
+                  </h4>
+                  <img
+                    src={ produto.thumbnail }
+                    alt={ produto.title }
+                  />
+                  <h4>
+                    {produto.price}
+                  </h4>
+                </Link>
+                <button
+                  data-testid="product-add-to-cart"
+                  onClick={ () => this.add2Cart(produto) }
+                >
+                  Adicionar
+                </button>
               </div>
             )))
             : (searched && (<p>Nenhum produto foi encontrado</p>))
