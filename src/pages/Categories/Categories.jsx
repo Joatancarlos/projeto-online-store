@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import { getCategories } from '../../services/api';
 import CategoryList from './CategoryList';
@@ -36,3 +37,4 @@ class Categories extends React.Component {
 }
 
 export default Categories;
+*/

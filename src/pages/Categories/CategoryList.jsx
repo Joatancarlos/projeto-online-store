@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -33,3 +34,4 @@ CategoryList.propTypes = {
 };
 
 export default CategoryList;
+*/
