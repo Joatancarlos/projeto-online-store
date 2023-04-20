@@ -5,7 +5,7 @@ import { getProductById } from '../services/api';
 
 class Details extends Component {
   state = {
-    productId: {},
+    product: {},
   };
 
   componentDidMount() {
@@ -14,21 +14,20 @@ class Details extends Component {
 
   fetchProduct = async () => {
     const { match: { params: { id } } } = this.props;
-    const productId = await getProductById(id);
-    this.setState({
-      productId,
-    });
+    const product = await getProductById(id);
+    this.setState({ product });
   };
 
   render() {
-    const { productId } = this.state;
+    const { add2Cart } = this.props;
+    const { product } = this.state;
     return (
       <main>
         <Link to="/">Voltar</Link>
         <div>
-          <h3 data-testid="product-detail-name">{ productId.title }</h3>
+          <h3 data-testid="product-detail-name">{ product.title }</h3>
           <img
-            src={ productId.thumbnail }
+            src={ product.thumbnail }
             alt="imagem do produto"
             data-testid="product-detail-image"
           />
@@ -42,11 +41,18 @@ class Details extends Component {
             <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
           </ul>
           <span data-testid="product-detail-price">
-            { productId.price }
+            { product.price }
           </span>
           <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
             <button type="button" name="shopping-cart-btn"> 🛍  </button>
           </Link>
+          <button
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => add2Cart(product) }
+            className="btn"
+          >
+            Adicionar
+          </button>
         </div>
       </main>
     );
@@ -54,6 +60,7 @@ class Details extends Component {
 }
 
 Details.propTypes = {
+  add2Cart: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
