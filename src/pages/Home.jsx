@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../Home.css';
@@ -34,14 +35,6 @@ class Home extends React.Component {
     });
   };
 
-  add2Cart = async (product) => {
-    let cartArray = [];
-    const cart = localStorage.getItem('cart');
-    if (cart) { cartArray = JSON.parse(cart); }
-    cartArray.push(product);
-    localStorage.setItem('cart', JSON.stringify(cartArray));
-  };
-
   fetchCategoryList = () => {
     getCategories().then((response) => {
       this.setState({
@@ -53,6 +46,7 @@ class Home extends React.Component {
   };
 
   render() {
+    const { add2Cart } = this.props;
     const { query, products, searched, categoryList } = this.state;
     return (
       <>
@@ -77,8 +71,6 @@ class Home extends React.Component {
           </button>
           <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
             Carrinho de Compras
-            <i className="fa-regular fa-cart-shopping" />
-
           </Link>
         </div>
         <p>Categorias:</p>
@@ -137,7 +129,7 @@ class Home extends React.Component {
                   </Link>
                   <button
                     data-testid="product-add-to-cart"
-                    onClick={ () => this.add2Cart(produto) }
+                    onClick={ () => add2Cart(produto) }
                     className="btn"
                   >
                     Adicionar
@@ -152,5 +144,9 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  add2Cart: PropTypes.func.isRequired,
+};
 
 export default Home;
