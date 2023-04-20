@@ -15,6 +15,11 @@ class Home extends React.Component {
     this.fetchCategoryList();
   }
 
+  shouldComponentUpdate() {
+    this.handleSearch();
+    return true;
+  }
+
   handleChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -69,7 +74,7 @@ class Home extends React.Component {
               <li key={ category.id }>
                 <label
                   data-testid="category"
-                  htmlFor={ `${category.id}` }
+                  htmlFor="category"
                 >
                   <input
                     type="radio"
