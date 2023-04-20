@@ -57,10 +57,11 @@ class Home extends React.Component {
     return (
       <>
         {/* Requisito 2 - Listagem de produtos */}
-        <div>
+        <div className="search">
           <label htmlFor="query">
             <input
               data-testid="query-input"
+              className="input-search"
               name="query"
               value={ query }
               type="text"
@@ -70,15 +71,18 @@ class Home extends React.Component {
           <button
             data-testid="query-button"
             onClick={ () => this.handleSearch() }
+            className="btn"
           >
             Pesquisar
           </button>
           <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
             Carrinho de Compras
+            <i className="fa-regular fa-cart-shopping" />
+
           </Link>
         </div>
         <p>Categorias:</p>
-        <ul>
+        <ul className="list">
           {
             categoryList.map((category) => (
               <li key={ category.id }>
@@ -126,14 +130,15 @@ class Home extends React.Component {
                         src={ produto.thumbnail }
                         alt={ produto.title }
                       />
-                      <h4>
-                        {produto.price}
-                      </h4>
+                      <h5>
+                        {`R$ ${produto.price}`}
+                      </h5>
                     </div>
                   </Link>
                   <button
                     data-testid="product-add-to-cart"
                     onClick={ () => this.add2Cart(produto) }
+                    className="btn"
                   >
                     Adicionar
                   </button>

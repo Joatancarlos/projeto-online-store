@@ -1,48 +1,40 @@
 import React from 'react';
+import Product from './Product';
 import '../Home.css';
 
 class ShoppingCart extends React.Component {
   state = {
     cart: [],
-    //    quantity: '',
   };
 
   componentDidMount() {
     const productsAdded = JSON.parse(localStorage.getItem('cart'));
     this.setState({ cart: productsAdded });
-
-    // handleClickMore = () => {
-    //   const { cart, quantity } = this.state;
-    //   this.setState({ quantity: { ...quantity },
-    //   });
-    // };
   }
+
+  removeProduct = ({ target }) => {
+    const { cart } = this.state;
+    const produtoById = cart.find((product) => product.id === target.id);
+    const removeIndex = cart.indexOf(produtoById);
+    cart.splice(removeIndex, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.setState({ cart });
+  };
 
   render() {
     const { cart } = this.state;
-    console.log(cart);
     return (
       <>
         <div />
         {
           cart !== null
-            ? (
-              cart.map((product) => {
-                const { id, title, price } = product;
-                console.log(product);
-                return (
-                  <div key={ id } className="product">
-                    <h4 data-testid="shopping-cart-product-name">
-                      { title }
-                    </h4>
-                    <h4>
-                      { price }
-                    </h4>
-                    <h4 data-testid="shopping-cart-product-quantity">1</h4>
-                  </div>
-                );
-              })
-            )
+            ? (cart.map((product) => (
+              <Product
+                product={ product }
+                removeProduct={ this.removeProduct }
+                key={ product.id }
+              />
+            )))
             : (
               <span
                 data-testid="shopping-cart-empty-message"
