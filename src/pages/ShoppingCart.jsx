@@ -1,8 +1,24 @@
 import React from 'react';
+import Product from './Product';
+import '../Home.css';
 
 class ShoppingCart extends React.Component {
   state = {
-    cart: '',
+    cart: [],
+  };
+
+  componentDidMount() {
+    const productsAdded = JSON.parse(localStorage.getItem('cart'));
+    this.setState({ cart: productsAdded });
+  }
+
+  removeProduct = ({ target }) => {
+    const { cart } = this.state;
+    const produtoById = cart.find((product) => product.id === target.id);
+    const removeIndex = cart.indexOf(produtoById);
+    cart.splice(removeIndex, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.setState({ cart });
   };
 
   render() {
@@ -11,8 +27,14 @@ class ShoppingCart extends React.Component {
       <>
         <div />
         {
-          cart
-            ? { cart }
+          cart !== null
+            ? (cart.map((product) => (
+              <Product
+                product={ product }
+                removeProduct={ this.removeProduct }
+                key={ product.id }
+              />
+            )))
             : (
               <span
                 data-testid="shopping-cart-empty-message"
