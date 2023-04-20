@@ -109,32 +109,40 @@ class Home extends React.Component {
               </p>
             )
         }
-        {
-          products.length > 0
-            ? (products.map((produto) => (
-              <div key={ produto.id } data-testid="product" className="product">
-                <Link to="/detalhes-do-produto">
-                  <h4>
-                    {produto.title}
-                  </h4>
-                  <img
-                    src={ produto.thumbnail }
-                    alt={ produto.title }
-                  />
-                  <h4>
-                    {produto.price}
-                  </h4>
-                </Link>
-                <button
-                  data-testid="product-add-to-cart"
-                  onClick={ () => this.add2Cart(produto) }
-                >
-                  Adicionar
-                </button>
-              </div>
-            )))
-            : (searched && (<p>Nenhum produto foi encontrado</p>))
-        }
+        <div className="list-products">
+          {
+            products.length > 0
+              ? (products.map((produto) => (
+                <div className="product" key={ produto.id }>
+                  <Link
+                    to={ `/detalhes-do-produto/${produto.id}` }
+                    data-testid="product-detail-link"
+                  >
+                    <div data-testid="product">
+                      <h4>
+                        {produto.title}
+                      </h4>
+                      <img
+                        src={ produto.thumbnail }
+                        alt={ produto.title }
+                      />
+                      <h4>
+                        {produto.price}
+                      </h4>
+                    </div>
+                  </Link>
+                  <button
+                    data-testid="product-add-to-cart"
+                    onClick={ () => this.add2Cart(produto) }
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              )))
+              : (searched && (<p>Nenhum produto foi encontrado</p>))
+          }
+
+        </div>
       </>
     );
   }

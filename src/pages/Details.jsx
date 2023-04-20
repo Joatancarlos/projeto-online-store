@@ -1,11 +1,11 @@
 import { Component } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 
 class Details extends Component {
   state = {
-    productInformation: {},
+    productId: {},
   };
 
   componentDidMount() {
@@ -13,21 +13,25 @@ class Details extends Component {
   }
 
   fetchProduct = async () => {
-    const { product } = this.props;
-    const { params: { id } } = product;
-    const productInformation = await getProductById(id);
-    this.setState({ productInformation });
+    const { match: { params: { id } } } = this.props;
+    const productId = await getProductById(id);
+    this.setState({
+      productId,
+    });
   };
 
   render() {
-    const { productInformation: { title, price, thumbnail } } = this.state;
-
+    const { productId } = this.state;
     return (
       <main>
         <Link to="/">Voltar</Link>
         <div>
-          <h3 data-testid="product-detail-name">{ title }</h3>
-          <img src={ thumbnail } alt={ title } data-testid="product-detail-image" />
+          <h3 data-testid="product-detail-name">{ productId.title }</h3>
+          <img
+            src={ productId.thumbnail }
+            alt="imagem do produto"
+            data-testid="product-detail-image"
+          />
         </div>
         <div>
           <h3>Especificações Técncas</h3>
@@ -38,7 +42,7 @@ class Details extends Component {
             <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
           </ul>
           <span data-testid="product-detail-price">
-            { `R$ ${price}` }
+            { productId.price }
           </span>
           <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
             <button type="button" name="shopping-cart-btn"> 🛍  </button>
@@ -50,11 +54,11 @@ class Details extends Component {
 }
 
 Details.propTypes = {
-  product: PropTypes.shape({
+  match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
+      id: PropTypes.string.isRequired,
     }),
-  }),
-}.isRequired;
+  }).isRequired,
+};
 
 export default Details;
