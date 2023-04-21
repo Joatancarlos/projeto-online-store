@@ -2,6 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
+import Review from '../components/Review';
 
 class Details extends Component {
   state = {
@@ -19,7 +20,7 @@ class Details extends Component {
   };
 
   render() {
-    const { add2Cart } = this.props;
+    const { add2Cart, match: { params: { id } } } = this.props;
     const { product } = this.state;
     return (
       <main>
@@ -54,6 +55,7 @@ class Details extends Component {
             Adicionar
           </button>
         </div>
+        <Review productId={ id } />
       </main>
     );
   }

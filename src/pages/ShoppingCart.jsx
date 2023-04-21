@@ -1,5 +1,5 @@
 import React from 'react';
-import Product from './Product';
+import Product from '../components/Product';
 import '../Home.css';
 
 class ShoppingCart extends React.Component {

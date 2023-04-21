@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import Details from './pages/Details';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 class App extends React.Component {
   add2Cart = async (product) => {
