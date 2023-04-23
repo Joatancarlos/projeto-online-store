@@ -10,12 +10,16 @@ class Product extends React.Component {
   handleQty = ({ target }) => {
     const { name } = target;
     let { quantity } = this.state;
+    let cartSize = JSON.parse(localStorage.getItem('cartSize'));
     if (name === 'increase') {
       quantity += 1;
+      cartSize += 1;
     } else {
       quantity -= 1;
+      cartSize -= 1;
       if (quantity <= 0) { quantity = 1; }
     }
+    localStorage.setItem('cartSize', JSON.stringify(cartSize));
     this.setState({ quantity });
   };
 

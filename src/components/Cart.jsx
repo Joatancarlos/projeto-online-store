@@ -6,7 +6,7 @@ class Cart extends React.Component {
 
   componentDidMount() {
     const productsAdded = JSON.parse(localStorage.getItem('cart'));
-    this.setState({ cart: productsAdded });
+    if (productsAdded !== null) this.setState({ cart: productsAdded });
   }
 
   removeProduct = ({ target }) => {

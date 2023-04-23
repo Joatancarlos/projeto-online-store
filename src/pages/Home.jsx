@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../Home.css';
+import CartButton from '../components/CartButton';
 
 class Home extends React.Component {
   state = {
@@ -69,9 +70,7 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
-          <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
-            Carrinho de Compras
-          </Link>
+          <CartButton />
         </div>
         <p>Categorias:</p>
         <ul className="list">
