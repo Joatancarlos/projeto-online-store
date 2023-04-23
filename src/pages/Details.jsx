@@ -45,7 +45,7 @@ class Details extends Component {
             { product.price }
           </span>
           <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
-            <button type="button" name="shopping-cart-btn"> 🛍  </button>
+            Carrinho de Compras
           </Link>
           <button
             data-testid="product-detail-add-to-cart"
