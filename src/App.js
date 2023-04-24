@@ -14,6 +14,13 @@ class App extends React.Component {
     if (cart) { cartArray = JSON.parse(cart); }
     cartArray.push(product);
     localStorage.setItem('cart', JSON.stringify(cartArray));
+
+    let cartSize = 0;
+    const cartSizeStorage = localStorage.getItem('cartSize');
+    if (cartSizeStorage) cartSize = JSON.parse(cartSizeStorage);
+    cartSize += 1;
+    localStorage.setItem('cartSize', JSON.stringify(cartSize));
+    this.forceUpdate();
   };
 
   render() {

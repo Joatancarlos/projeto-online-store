@@ -1,6 +1,6 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import '../Home.css';
+import '../pages/Home.css';
 
 class Product extends React.Component {
   state = {
@@ -8,14 +8,19 @@ class Product extends React.Component {
   };
 
   handleQty = ({ target }) => {
+    const { product } = this.props;
     const { name } = target;
     let { quantity } = this.state;
-    if (name === 'increase') {
+    let cartSize = JSON.parse(localStorage.getItem('cartSize'));
+    if (name === 'increase' && quantity + 1 <= product.available_quantity) {
       quantity += 1;
-    } else {
+      cartSize += 1;
+    } else if (name === 'decrease') {
       quantity -= 1;
+      cartSize -= 1;
       if (quantity <= 0) { quantity = 1; }
     }
+    localStorage.setItem('cartSize', JSON.stringify(cartSize));
     this.setState({ quantity });
   };
 
@@ -23,6 +28,7 @@ class Product extends React.Component {
     const { product, removeProduct } = this.props;
     const { id, title, price } = product;
     const { quantity } = this.state;
+    console.log(product);
     return (
       <div key={ id } className="product">
         <h4 data-testid="shopping-cart-product-name">

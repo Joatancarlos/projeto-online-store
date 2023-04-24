@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import Review from '../components/Review';
+import CartButton from '../components/CartButton';
 
 class Details extends Component {
   state = {
@@ -44,9 +45,7 @@ class Details extends Component {
           <span data-testid="product-detail-price">
             { product.price }
           </span>
-          <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
-            Carrinho de Compras
-          </Link>
+          <CartButton />
           <button
             data-testid="product-detail-add-to-cart"
             onClick={ () => add2Cart(product) }
