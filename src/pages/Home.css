@@ -28,7 +28,7 @@ body {
 
 .product {
   align-items: center;
-  background-color: #fff;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 1px 1px 5px #909090;
   display: flex;
@@ -55,43 +55,43 @@ a {
 
 .product img {
   border-radius: 3px;
-  width: 7vw;
   display: flex;
   margin: auto;
+  width: 7vw;
 }
 
 .product .title {
-  font-size: 0.875rem;
-  line-height: 1.125rem;
-  font-weight: 600;
-  text-align: justify;
-  margin-top: 0.6rem;
   color: rgb(66, 70, 77);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  margin-top: 0.6rem;
+  text-align: justify;
 }
 
 .product .price {
+  color: rgb(66, 70, 77);
   display: flex;
+  font-size: 1.3rem;
   justify-content: center;
   margin-top: 0.6rem;
-  font-size: 1.3rem;
-  color: rgb(66, 70, 77);
 }
 
 .product .btn {
   background-color: #272a2e;
   border: none;
   border-radius: 5px;
-  color: #fff;
+  color: white;
   font-size: 600;
   padding: 7px 20px;
   text-transform: uppercase;
-  width: 100%;
   transition: all 0.2s ease-in-out;
+  width: 100%;
 }
 
 .product .shipping {
-  position: relative;
   margin-top: 0;
+  position: relative;
   top: 0;
 }
 
