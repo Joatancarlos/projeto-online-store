@@ -7,7 +7,8 @@ class CartButton extends React.Component {
     return (
       <div>
         <Link to="/carrinho-de-compras" data-testid="shopping-cart-button">
-          Carrinho de Compras
+          <i className="fa-solid fa-cart-shopping fa-2x" />
+          <h4>Carrinho de Compras</h4>
         </Link>
         <div data-testid="shopping-cart-size">{ cartSize }</div>
       </div>

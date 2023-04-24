@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import '../Home.css';
+import './Home.css';
 import CartButton from '../components/CartButton';
 
 class Home extends React.Component {
@@ -114,14 +114,14 @@ class Home extends React.Component {
                     data-testid="product-detail-link"
                   >
                     <div data-testid="product">
-                      <h4>
-                        {produto.title}
-                      </h4>
                       <img
                         src={ produto.thumbnail }
                         alt={ produto.title }
                       />
-                      <h5>
+                      <h4 className="title">
+                        {produto.title}
+                      </h4>
+                      <h5 className="price">
                         {`R$ ${produto.price}`}
                       </h5>
                     </div>
@@ -133,6 +133,14 @@ class Home extends React.Component {
                   >
                     Adicionar
                   </button>
+                  {
+                    produto.shipping.free_shipping && (
+                      <div data-testid="free-shipping" className="shipping">
+                        <span>Frete grátis!     </span>
+                        <i className="fa-solid fa-truck fa-1x" />
+                      </div>
+                    )
+                  }
                 </div>
               )))
               : (searched && (<p>Nenhum produto foi encontrado</p>))
