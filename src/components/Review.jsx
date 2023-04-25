@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TextField } from '@mui/material';
 import './Review.css';
-/* Apagar {' '} e <br /> após CSS */
 
 class ReviewForm extends React.Component {
   state = {
@@ -60,27 +60,36 @@ class ReviewForm extends React.Component {
     const stars = ['1', '2', '3', '4', '5'];
     const reviews = JSON.parse(localStorage.getItem(`${productId}`));
     return (
-      <form>
-        <fieldset>
-          <legend>De seu feeedback sobre o produto!</legend>
-          <label htmlFor="email">
-            Email:
-            <input
-              data-testid="product-detail-email"
-              type="email"
-              name="email"
-              id="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          {' '}
-          <br />
-          <br />
-          Avaliação:
+      <form className="review">
+        <h3>De seu feeedback sobre o produto!</h3>
+        <TextField
+          inputProps={ { 'data-testid': 'product-detail-email' } }
+          type="email"
+          name="email"
+          id="email"
+          label="Email"
+          value={ email }
+          onChange={ this.handleChange }
+          className="input"
+        />
+        <div>
+          <TextField
+            inputProps={ { 'data-testid': 'product-detail-evaluation' } }
+            name="text"
+            id="text"
+            label="Comentários"
+            multiline
+            rows={ 5 }
+            value={ text }
+            onChange={ this.handleChange }
+            className="input"
+          />
+        </div>
+        <div>
+          <strong>Avaliação </strong>
           {
             stars.map((star) => {
-              const starColor = rating >= star ? 'rgb(255, 255, 80)' : '#b0b0b0';
+              const starColor = rating >= star ? 'rgb(255 202 0)' : 'rgb(213 213 213)';
               return (
                 <button
                   key={ star }
@@ -98,34 +107,14 @@ class ReviewForm extends React.Component {
               );
             })
           }
-          {' '}
-          <br />
-          <br />
-          <div>
-            <label htmlFor="text">
-              Comentários:
-              {' '}
-              <br />
-              <textarea
-                data-testid="product-detail-evaluation"
-                name="text"
-                id="text"
-                cols="25"
-                rows="5"
-                value={ text }
-                onChange={ this.handleChange }
-              />
-            </label>
-            {' '}
-            <br />
-            <button
-              data-testid="submit-review-btn"
-              onClick={ (event) => this.submitReview(event) }
-            >
-              Enviar
-            </button>
-          </div>
-        </fieldset>
+        </div>
+        <button
+          data-testid="submit-review-btn"
+          onClick={ (event) => this.submitReview(event) }
+          className="btn"
+        >
+          Enviar
+        </button>
         {
           validReview
             ? (<p>Agradecemos pelo feedback!</p>)
@@ -136,20 +125,29 @@ class ReviewForm extends React.Component {
             <section className="reviews">
               {
                 reviews.map((review) => (
-                  <div key={ review.email }>
-                    <h5 data-testid="review-card-email">{ review.email }</h5>
-                    <div data-testid="review-card-rating">
-                      {
-                        Array.from({ length: review.rating }, (_, idx) => (
-                          <i
-                            key={ idx }
-                            className="fa-solid fa-star"
-                            style={ { color: 'yellow' } }
-                          />
-                        ))
-                      }
+                  <div key={ review.email } className="reviwer">
+                    <div className="comment-header">
+                      <h5 data-testid="review-card-email" className="email">
+                        { review.email }
+                      </h5>
+                      <span data-testid="review-card-rating">
+                        {
+                          Array.from({ length: review.rating }, (_, idx) => (
+                            <i
+                              key={ idx }
+                              className="fa-solid fa-star"
+                              style={ { color: 'rgb(255 202 0)' } }
+                            />
+                          ))
+                        }
+                      </span>
                     </div>
-                    <p data-testid="review-card-evaluation">{ review.text }</p>
+                    <div
+                      data-testid="review-card-evaluation"
+                      className="comment"
+                    >
+                      { review.text }
+                    </div>
                   </div>
                 ))
               }

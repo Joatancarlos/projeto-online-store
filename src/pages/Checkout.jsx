@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TextField } from '@mui/material';
 import Cart from '../components/Cart';
 import Search from '../components/Search';
 import './Home.css';
@@ -53,87 +54,76 @@ class Checkout extends React.Component {
       submitClicked,
     } = this.state;
     return (
-      <section>
+      <section className="checkout">
         <header className="header">
           <Search />
         </header>
-        <fieldset className="info">
-          <div className="person-info">
-            <label htmlFor="name">
-              Nome Completo:
-              <input
-                data-testid="checkout-fullname"
+        <section className="info container">
+          <div>
+            <div className="person-info">
+              <TextField
+                label="Nome completo"
+                inputProps={ { 'data-testid': 'checkout-fullname' } }
                 type="text"
                 name="name"
                 id="name"
                 value={ name }
                 onChange={ this.handleChange }
               />
-            </label>
-            <label htmlFor="cpf">
-              CPF:
-              <input
-                data-testid="checkout-cpf"
+              <TextField
+                label="CPF"
+                inputProps={ { 'data-testid': 'checkout-cpf' } }
                 type="text"
                 name="cpf"
                 id="cpf"
                 value={ cpf }
                 onChange={ this.handleChange }
               />
-            </label>
-          </div>
-          <div className="contact-info">
-            <label htmlFor="email">
-              Email:
-              <input
-                data-testid="checkout-email"
+            </div>
+            <div className="contact-info">
+              <TextField
+                label="Email"
+                inputProps={ { 'data-testid': 'checkout-email' } }
                 type="email"
                 name="email"
                 id="email"
                 value={ email }
                 onChange={ this.handleChange }
               />
-            </label>
-            <label htmlFor="phone">
-              Telefone:
-              <input
-                data-testid="checkout-phone"
+              <TextField
+                label="Telefone"
+                inputProps={ { 'data-testid': 'checkout-phone' } }
                 type="text"
                 name="phone"
                 id="phone"
                 value={ phone }
                 onChange={ this.handleChange }
               />
-            </label>
-          </div>
-          <div className="address-info">
-            <label htmlFor="cep">
-              CEP:
-              <input
-                data-testid="checkout-cep"
+            </div>
+            <div className="address-info">
+              <TextField
+                label="CEP"
+                inputProps={ { 'data-testid': 'checkout-cep' } }
                 type="text"
                 name="cep"
                 id="cep"
                 value={ cep }
                 onChange={ this.handleChange }
               />
-            </label>
-            <label htmlFor="address">
-              Endereço:
-              <input
-                data-testid="checkout-address"
+              <TextField
+                label="Endereço"
+                inputProps={ { 'data-testid': 'checkout-address' } }
                 type="text"
                 name="address"
                 id="address"
                 value={ address }
                 onChange={ this.handleChange }
               />
-            </label>
+            </div>
           </div>
-          <fieldset>
-            <legend>Método de pagamento</legend>
-            <label htmlFor="paymentMethod">
-              Boleto
+          <section className="paymentMethod">
+            <h2>Métodos de Pagamento</h2>
+            <label htmlFor="boleto">
               <input
                 data-testid="ticket-payment"
                 type="radio"
@@ -141,9 +131,9 @@ class Checkout extends React.Component {
                 id="boleto"
                 onClick={ () => this.setState({ paymentMethod: 'boleto' }) }
               />
+              Boleto
             </label>
-            <label htmlFor="paymentMethod">
-              Visa
+            <label htmlFor="visa">
               <input
                 data-testid="visa-payment"
                 type="radio"
@@ -151,9 +141,9 @@ class Checkout extends React.Component {
                 id="visa"
                 onClick={ () => this.setState({ paymentMethod: 'visa' }) }
               />
+              Visa
             </label>
-            <label htmlFor="paymentMethod">
-              Master Card
+            <label htmlFor="master">
               <input
                 data-testid="master-payment"
                 type="radio"
@@ -161,9 +151,9 @@ class Checkout extends React.Component {
                 id="master"
                 onClick={ () => this.setState({ paymentMethod: 'master' }) }
               />
+              Master Card
             </label>
-            <label htmlFor="paymentMethod">
-              Elo
+            <label htmlFor="elo">
               <input
                 data-testid="elo-payment"
                 type="radio"
@@ -171,21 +161,22 @@ class Checkout extends React.Component {
                 id="elo"
                 onClick={ () => this.setState({ paymentMethod: 'elo' }) }
               />
+              Elo
             </label>
-          </fieldset>
-          <button
-            className="btn"
-            data-testid="checkout-btn"
-            onClick={ () => this.submitOrder(history) }
-          >
-            Finalizar compra
-          </button>
-        </fieldset>
+          </section>
+        </section>
         {
           (!inputsValidation && submitClicked)
-          && <p data-testid="error-msg">Campos inválidos</p>
+          && <h2 data-testid="error-msg" className="error-msg">Campos inválidos</h2>
         }
         <Cart />
+        <button
+          className="checkout-btn btn"
+          data-testid="checkout-btn"
+          onClick={ () => this.submitOrder(history) }
+        >
+          Finalizar compra
+        </button>
       </section>
     );
   }
