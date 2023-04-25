@@ -6,7 +6,7 @@
 .shopping-cart .btn {
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .shopping-cart-product {
@@ -18,7 +18,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin: 0.5vw auto;
-  padding: 0.2vw;
+  padding: 0.8vw;
   transition: all 0.2s ease-in-out;
   width: 75%;
 }
@@ -33,5 +33,5 @@
 
 .shopping-cart-product .price {
   text-align: center;
-  width: 10%;
+  width: 15%;
 }

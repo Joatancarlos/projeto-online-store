@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import Review from '../components/Review';
-import CartButton from '../components/CartButton';
+import Search from '../components/Search';
+import './Home.css';
 
 class Details extends Component {
   state = {
@@ -23,38 +24,51 @@ class Details extends Component {
   render() {
     const { add2Cart, match: { params: { id } } } = this.props;
     const { product } = this.state;
+    const { attributes } = product;
+    console.log(attributes);
     return (
-      <section>
-        <Link to="/">Voltar</Link>
-        <div>
-          <h3 data-testid="product-detail-name">{ product.title }</h3>
-          <img
-            src={ product.thumbnail }
-            alt="imagem do produto"
-            data-testid="product-detail-image"
-          />
+      <section className="details">
+        <header className="header">
+          <Search />
+        </header>
+        <div className="container">
+          <div className="product">
+            <img
+              src={ product.thumbnail }
+              alt="imagem do produto"
+              data-testid="product-detail-image"
+            />
+            <div>
+              <h3 data-testid="product-detail-name">{ product.title }</h3>
+              <h3>Especificações Técnicas: </h3>
+              <ul className="list-att">
+                {
+                  attributes !== undefined && attributes.map((att) => (
+                    <li key={ att.name }>
+                      <strong>{`${att.name}: `}</strong>
+                      {att.value_name}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <h3
+              data-testid="product-detail-price"
+              className="price"
+            >
+              {`R$ ${product.price}`}
+            </h3>
+            <button
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => add2Cart(product) }
+              className="btn"
+            >
+              Adicionar
+            </button>
+            <Link to="/" className="btn">Voltar</Link>
+          </div>
+          <Review productId={ id } />
         </div>
-        <div>
-          <h3>Especificações Técncas</h3>
-          <ul>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-          </ul>
-          <span data-testid="product-detail-price">
-            { product.price }
-          </span>
-          <CartButton />
-          <button
-            data-testid="product-detail-add-to-cart"
-            onClick={ () => add2Cart(product) }
-            className="btn"
-          >
-            Adicionar
-          </button>
-        </div>
-        <Review productId={ id } />
       </section>
     );
   }
