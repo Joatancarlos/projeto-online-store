@@ -1,68 +1,93 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import '../pages/Home.css';
+import '../pages/ShoppingCart.css';
 
 class Product extends React.Component {
   state = {
     quantity: 1,
+    cart: [],
   };
 
-  handleQty = ({ target }) => {
-    const { product } = this.props;
-    const { name } = target;
-    let { quantity } = this.state;
-    let cartSize = JSON.parse(localStorage.getItem('cartSize'));
-    if (name === 'increase' && quantity + 1 <= product.available_quantity) {
-      quantity += 1;
-      cartSize += 1;
-    } else if (name === 'decrease') {
-      quantity -= 1;
-      cartSize -= 1;
-      if (quantity <= 0) { quantity = 1; }
-    }
-    localStorage.setItem('cartSize', JSON.stringify(cartSize));
+  componentDidMount() {
+    this.updateQty();
+    this.getCart();
+  }
+
+  updateQty = () => {
+    const { product: { quantity } } = this.props;
     this.setState({ quantity });
+  };
+
+  getCart = () => {
+    let cartArray = [];
+    const cart = localStorage.getItem('cart');
+    if (cart) { cartArray = JSON.parse(cart); }
+    this.setState({ cart: cartArray });
+  };
+
+  handleQty = (action) => {
+    const { cart } = this.state;
+    const { product: { product } } = this.props;
+    const produto = cart.find((item) => item.product.id === product.id);
+    const index = cart.indexOf(produto);
+    if (action === 'increase' && cart[index].quantity + 1 <= product.available_quantity) {
+      cart[index].quantity += 1;
+    } else if (action === 'decrease') {
+      cart[index].quantity -= 1;
+      if (cart[index].quantity <= 0) { cart[index].quantity = 1; }
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.setState({ quantity: cart[index].quantity });
+
+    let cartSize = 0;
+    const cartSizeStorage = localStorage.getItem('cartSize');
+    if (cartSizeStorage) cartSize = JSON.parse(cartSizeStorage);
+    cartSize = cart.reduce((acc, cur) => cur.quantity + acc, 0);
+    localStorage.setItem('cartSize', JSON.stringify(cartSize));
   };
 
   render() {
     const { product, removeProduct } = this.props;
-    const { id, title, price } = product;
+    const { id, title, price, thumbnail } = product.product;
     const { quantity } = this.state;
-    console.log(product);
     return (
-      <div key={ id } className="product">
-        <h4 data-testid="shopping-cart-product-name">
-          { title }
+      <div key={ id } className="shopping-cart-product">
+        <img src={ thumbnail } alt={ title } />
+        <h4 data-testid="shopping-cart-product-name" className="title">{ title }</h4>
+        <div className="plus-and-less">
+          <button
+            onClick={ () => this.handleQty('decrease') }
+            data-testid="product-decrease-quantity"
+          >
+            <i className="fa-solid fa-minus qtdBtn" />
+          </button>
+          <h4
+            data-testid="shopping-cart-product-quantity"
+            className="qtdBtn"
+          >
+            { quantity }
+          </h4>
+          <button
+            onClick={ () => this.handleQty('increase') }
+            data-testid="product-increase-quantity"
+          >
+            <i className="fa-solid fa-plus qtdBtn" />
+          </button>
+        </div>
+        <h4 className="price">
+          <span>R$ </span>
+          { (price * quantity).toFixed(2) }
         </h4>
-        <h4>
-          { price }
-        </h4>
-        <button
-          name="increase"
-          onClick={ (event) => this.handleQty(event) }
-          data-testid="product-increase-quantity"
-        >
-          Adicionar
-        </button>
-        <button
-          name="decrease"
-          onClick={ (event) => this.handleQty(event) }
-          data-testid="product-decrease-quantity"
-        >
-          Remove
-        </button>
         <button
           id={ id }
           onClick={ (event) => removeProduct(event) }
           data-testid="remove-product"
+          className="remove-product"
         >
-          X
+          <span id={ id }>Remover produto </span>
+          <i className="fa-solid fa-xmark" id={ id } />
         </button>
-        <h4
-          data-testid="shopping-cart-product-quantity"
-        >
-          { quantity }
-        </h4>
       </div>
     );
   }
@@ -72,6 +97,7 @@ Product.propTypes = {
   id: Proptypes.string,
   title: Proptypes.string,
   price: Proptypes.string,
+  thumbnail: Proptypes.string,
   product: Proptypes.object,
   removeProduct: Proptypes.func,
 }.isRequired;

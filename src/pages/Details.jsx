@@ -24,7 +24,7 @@ class Details extends Component {
     const { add2Cart, match: { params: { id } } } = this.props;
     const { product } = this.state;
     return (
-      <main>
+      <section>
         <Link to="/">Voltar</Link>
         <div>
           <h3 data-testid="product-detail-name">{ product.title }</h3>
@@ -55,7 +55,7 @@ class Details extends Component {
           </button>
         </div>
         <Review productId={ id } />
-      </main>
+      </section>
     );
   }
 }
