@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Cart from '../components/Cart';
 import './Home.css';
+import './ShoppingCart.css';
 
 class ShoppingCart extends React.Component {
   state = { cart: [] };
@@ -14,7 +15,7 @@ class ShoppingCart extends React.Component {
   render() {
     const { cart } = this.state;
     return (
-      <>
+      <section className="shopping-cart">
         {
           cart.length > 0
             ? (<Cart />)
@@ -26,8 +27,14 @@ class ShoppingCart extends React.Component {
               </span>
             )
         }
-        <Link to="/checkout" data-testid="checkout-products">Finalizar pedido</Link>
-      </>
+        <Link
+          to="/checkout"
+          data-testid="checkout-products"
+          className="btn"
+        >
+          Finalizar pedido
+        </Link>
+      </section>
     );
   }
 }

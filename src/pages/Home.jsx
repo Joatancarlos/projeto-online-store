@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import './Home.css';
-import CartButton from '../components/CartButton';
+import Categories from '../components/Categories';
+import ProductsList from '../components/ProductsList';
+import Search from '../components/Search';
+import MsgBuscar from '../components/MsgBuscar';
 
 class Home extends React.Component {
   state = {
@@ -51,102 +53,27 @@ class Home extends React.Component {
     const { query, products, searched, categoryList } = this.state;
     return (
       <>
-        {/* Requisito 2 - Listagem de produtos */}
-        <div className="search">
-          <label htmlFor="query">
-            <input
-              data-testid="query-input"
-              className="input-search"
-              name="query"
-              value={ query }
-              type="text"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            data-testid="query-button"
-            onClick={ () => this.handleSearch() }
-            className="btn"
-          >
-            Pesquisar
-          </button>
-          <CartButton />
-        </div>
-        <p>Categorias:</p>
-        <ul className="list">
-          {
-            categoryList.map((category) => (
-              <li key={ category.id }>
-                <label
-                  data-testid="category"
-                  htmlFor={ category.id }
-                >
-                  <input
-                    type="radio"
-                    value={ `${category.name}` }
-                    name="category"
-                    id={ category.id }
-                    onClick={ this.handleClickRatio }
-                  />
-                  {`${category.name}`}
-                </label>
-              </li>
-            ))
-          }
-        </ul>
-        {
-          query.length > 0
-            ? (
-              <p> </p>
-            ) : (
-              <p data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </p>
-            )
-        }
-        <div className="list-products">
-          {
-            products.length > 0
-              ? (products.map((produto) => (
-                <div className="product" key={ produto.id }>
-                  <Link
-                    to={ `/detalhes-do-produto/${produto.id}` }
-                    data-testid="product-detail-link"
-                  >
-                    <div data-testid="product">
-                      <img
-                        src={ produto.thumbnail }
-                        alt={ produto.title }
-                      />
-                      <h4 className="title">
-                        {produto.title}
-                      </h4>
-                      <h5 className="price">
-                        {`R$ ${produto.price}`}
-                      </h5>
-                    </div>
-                  </Link>
-                  <button
-                    data-testid="product-add-to-cart"
-                    onClick={ () => add2Cart(produto) }
-                    className="btn"
-                  >
-                    Adicionar
-                  </button>
-                  {
-                    produto.shipping.free_shipping && (
-                      <div data-testid="free-shipping" className="shipping">
-                        <span>Frete grátis!     </span>
-                        <i className="fa-solid fa-truck fa-1x" />
-                      </div>
-                    )
-                  }
-                </div>
-              )))
-              : (searched && (<p>Nenhum produto foi encontrado</p>))
-          }
-
-        </div>
+        <header className="header">
+          <Search
+            query={ query }
+            handleChange={ this.handleChange }
+            handleSearch={ this.handleSearch }
+          />
+          <MsgBuscar
+            query={ query }
+          />
+        </header>
+        <main className="main container">
+          <Categories
+            handleClickRatio={ this.handleClickRatio }
+            categoryList={ categoryList }
+          />
+          <ProductsList
+            products={ products }
+            add2Cart={ add2Cart }
+            searched={ searched }
+          />
+        </main>
       </>
     );
   }

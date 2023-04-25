@@ -30,6 +30,7 @@ class Checkout extends React.Component {
       this.setState({ inputsValidation }, () => {
         if (inputsValidation) {
           localStorage.setItem('cart', JSON.stringify([]));
+          localStorage.setItem('cartSize', '0');
           hs.push('/');
         }
       });

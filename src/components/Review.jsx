@@ -80,11 +80,13 @@ class ReviewForm extends React.Component {
           Avaliação:
           {
             stars.map((star) => {
-              const starColor = rating >= star ? 'yellow' : 'gray';
+              const starColor = rating >= star ? 'rgb(255, 255, 80)' : '#b0b0b0';
               return (
                 <button
                   key={ star }
                   onClick={ (event) => this.rate(event, star) }
+                  onMouseOver={ (event) => this.rate(event, star) }
+                  onFocus={ (event) => this.rate(event, star) }
                   className="starBtn"
                 >
                   <i
