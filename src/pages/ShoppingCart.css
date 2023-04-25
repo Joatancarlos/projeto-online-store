@@ -6,7 +6,7 @@
 .shopping-cart .btn {
   display: flex;
   justify-content: center;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .shopping-cart-product {

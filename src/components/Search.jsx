@@ -23,7 +23,7 @@ export default class Search extends Component {
           />
           <button
             data-testid="query-button"
-            onClick={ () => handleSearch() }
+            onClick={ handleSearch }
             className="btn"
           >
             <span>Pesquisar  </span>

@@ -7,18 +7,18 @@ export default class MsgBuscar extends Component {
       query,
     } = this.props;
     return (
-      <p>
+      <div>
         {
           query.length > 0
             ? (
               <p> </p>
             ) : (
-              <h4 data-testid="home-initial-message" className="search-msg">
+              <p data-testid="home-initial-message" className="search-msg">
                 Digite algum termo de pesquisa ou escolha uma categoria.
-              </h4>
+              </p>
             )
         }
-      </p>
+      </div>
     );
   }
 }

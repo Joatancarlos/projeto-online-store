@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cart from '../components/Cart';
+import Search from '../components/Search';
+import './Home.css';
+import './Checkout.css';
 
 class Checkout extends React.Component {
   state = {
@@ -50,75 +53,83 @@ class Checkout extends React.Component {
       submitClicked,
     } = this.state;
     return (
-      <div>
-        <Cart />
-        <fieldset>
-          <label htmlFor="name">
-            Nome Completo:
-            <input
-              data-testid="checkout-fullname"
-              type="text"
-              name="name"
-              id="name"
-              value={ name }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="email">
-            Email:
-            <input
-              data-testid="checkout-email"
-              type="email"
-              name="email"
-              id="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="cpf">
-            CPF:
-            <input
-              data-testid="checkout-cpf"
-              type="text"
-              name="cpf"
-              id="cpf"
-              value={ cpf }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="phone">
-            Telefone:
-            <input
-              data-testid="checkout-phone"
-              type="text"
-              name="phone"
-              id="phone"
-              value={ phone }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="cep">
-            CEP:
-            <input
-              data-testid="checkout-cep"
-              type="text"
-              name="cep"
-              id="cep"
-              value={ cep }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="address">
-            Endereço:
-            <input
-              data-testid="checkout-address"
-              type="text"
-              name="address"
-              id="address"
-              value={ address }
-              onChange={ this.handleChange }
-            />
-          </label>
+      <section>
+        <header className="header">
+          <Search />
+        </header>
+        <fieldset className="info">
+          <div className="person-info">
+            <label htmlFor="name">
+              Nome Completo:
+              <input
+                data-testid="checkout-fullname"
+                type="text"
+                name="name"
+                id="name"
+                value={ name }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label htmlFor="cpf">
+              CPF:
+              <input
+                data-testid="checkout-cpf"
+                type="text"
+                name="cpf"
+                id="cpf"
+                value={ cpf }
+                onChange={ this.handleChange }
+              />
+            </label>
+          </div>
+          <div className="contact-info">
+            <label htmlFor="email">
+              Email:
+              <input
+                data-testid="checkout-email"
+                type="email"
+                name="email"
+                id="email"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label htmlFor="phone">
+              Telefone:
+              <input
+                data-testid="checkout-phone"
+                type="text"
+                name="phone"
+                id="phone"
+                value={ phone }
+                onChange={ this.handleChange }
+              />
+            </label>
+          </div>
+          <div className="address-info">
+            <label htmlFor="cep">
+              CEP:
+              <input
+                data-testid="checkout-cep"
+                type="text"
+                name="cep"
+                id="cep"
+                value={ cep }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label htmlFor="address">
+              Endereço:
+              <input
+                data-testid="checkout-address"
+                type="text"
+                name="address"
+                id="address"
+                value={ address }
+                onChange={ this.handleChange }
+              />
+            </label>
+          </div>
           <fieldset>
             <legend>Método de pagamento</legend>
             <label htmlFor="paymentMethod">
@@ -163,6 +174,7 @@ class Checkout extends React.Component {
             </label>
           </fieldset>
           <button
+            className="btn"
             data-testid="checkout-btn"
             onClick={ () => this.submitOrder(history) }
           >
@@ -173,7 +185,8 @@ class Checkout extends React.Component {
           (!inputsValidation && submitClicked)
           && <p data-testid="error-msg">Campos inválidos</p>
         }
-      </div>
+        <Cart />
+      </section>
     );
   }
 }

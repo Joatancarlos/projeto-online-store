@@ -37,11 +37,12 @@ a {
   border: none;
   border-radius: 5px;
   color: white;
-  font-size: 600;
-  padding: 0.5vw;
+  font-weight: 600;
+  font-size: .9em;
+  padding: .5vw .8vw;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
-  width: 10vw;
+  max-width: 14vw;
 }
 
 .search .btn {
@@ -263,4 +264,27 @@ li {
   cursor: pointer;
   font-size: 1rem;
   position: relative;
+}
+
+.empty-cart {
+  background-color: #c5c5c546;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-cart * {
+  margin-bottom: 20px;
+}
+
+::-webkit-scrollbar {
+  height: 15px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #3685FB;
 }
