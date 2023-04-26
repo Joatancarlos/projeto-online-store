@@ -1,7 +1,7 @@
 .shopping-cart {
   margin: auto;
-  width: 90%;
   padding: 1vw;
+  width: 90%;
 }
 
 .shopping-cart .btn {
@@ -29,26 +29,27 @@
 }
 
 .shopping-cart-product .title {
-  width: 65%;
   margin: 0 1vw;
+  width: 65%;
 }
 
 .shopping-cart-product .price {
-  text-align: center;
-  display: flex;
   align-items: center;
+  display: flex;
   margin: 0 1.5vw;
+  text-align: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and ( max-width : 768px ) {
+
   .shopping-cart {
     width: 98%;
   }
 
   .shopping-cart-product {
-    width: 100%;
     margin: 3vw auto;
     position: relative;
+    width: 100%;
   }
 
   .shopping-cart-product * {
@@ -77,12 +78,12 @@
   }
 
   .remove-product {
-    position: absolute;
-    top: -1.5vw;
-    right: -2vw;
-    color: red;
-    padding: 0;
     background-color: transparent;
+    color: red;
     font-size: 1.5em;
+    padding: 0;
+    position: absolute;
+    right: -2vw;
+    top: -1.5vw;
   }
 }

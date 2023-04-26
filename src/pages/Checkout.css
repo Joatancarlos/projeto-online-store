@@ -60,7 +60,8 @@
   text-align: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and ( max-width : 768px ) {
+
   .checkout > .container {
     width: 98%;
   }
@@ -83,8 +84,8 @@
   }
 
   .paymentMethod {
-    padding: 4vw;
     margin: 2vw;
+    padding: 4vw;
   }
 
   .paymentMethod input {
@@ -92,6 +93,7 @@
     margin: auto;
     width: auto;
   }
+
   .info input {
     height: auto;
     width: auto;
