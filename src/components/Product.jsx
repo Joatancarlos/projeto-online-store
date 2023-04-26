@@ -28,7 +28,7 @@ class Product extends React.Component {
 
   handleQty = (action) => {
     const { cart } = this.state;
-    const { product: { product } } = this.props;
+    const { product: { product }, updateSize } = this.props;
     const produto = cart.find((item) => item.product.id === product.id);
     const index = cart.indexOf(produto);
     if (action === 'increase' && cart[index].quantity + 1 <= product.available_quantity) {
@@ -45,6 +45,7 @@ class Product extends React.Component {
     if (cartSizeStorage) cartSize = JSON.parse(cartSizeStorage);
     cartSize = cart.reduce((acc, cur) => cur.quantity + acc, 0);
     localStorage.setItem('cartSize', JSON.stringify(cartSize));
+    updateSize();
   };
 
   render() {
@@ -54,31 +55,35 @@ class Product extends React.Component {
     return (
       <div key={ id } className="shopping-cart-product">
         <img src={ thumbnail } alt={ title } />
-        <h4 data-testid="shopping-cart-product-name" className="title">{ title }</h4>
-        <div className="plus-and-less">
-          <button
-            onClick={ () => this.handleQty('decrease') }
-            data-testid="product-decrease-quantity"
-          >
-            <i className="fa-solid fa-minus qtdBtn" />
-          </button>
-          <h4
-            data-testid="shopping-cart-product-quantity"
-            className="qtdBtn"
-          >
-            { quantity }
-          </h4>
-          <button
-            onClick={ () => this.handleQty('increase') }
-            data-testid="product-increase-quantity"
-          >
-            <i className="fa-solid fa-plus qtdBtn" />
-          </button>
+        <div className="title">
+          <h4 data-testid="shopping-cart-product-name">{ title }</h4>
         </div>
-        <h4 className="price">
-          <span>R$ </span>
-          { (price * quantity).toFixed(2) }
-        </h4>
+        <div className="responsive">
+          <div className="plus-and-less">
+            <button
+              onClick={ () => this.handleQty('decrease') }
+              data-testid="product-decrease-quantity"
+            >
+              <i className="fa-solid fa-minus qtdBtn" />
+            </button>
+            <h4
+              data-testid="shopping-cart-product-quantity"
+              className="qtdBtn"
+            >
+              { quantity }
+            </h4>
+            <button
+              onClick={ () => this.handleQty('increase') }
+              data-testid="product-increase-quantity"
+            >
+              <i className="fa-solid fa-plus qtdBtn" />
+            </button>
+          </div>
+          <h4 className="price">
+            <span>R$ </span>
+            { (price * quantity).toFixed(2) }
+          </h4>
+        </div>
         <button
           id={ id }
           onClick={ (event) => removeProduct(event) }

@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { getProductById } from '../services/api';
 import Review from '../components/Review';
 import Search from '../components/Search';
@@ -29,7 +28,7 @@ class Details extends Component {
     return (
       <section className="details">
         <header className="header">
-          <Search />
+          <Search hiddenQuery />
         </header>
         <div className="container">
           <div className="product">
@@ -65,7 +64,6 @@ class Details extends Component {
             >
               Adicionar
             </button>
-            <Link to="/" className="btn">Voltar</Link>
           </div>
           <Review productId={ id } />
         </div>

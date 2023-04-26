@@ -14,6 +14,7 @@ class Home extends React.Component {
     categoryList: [],
     products: [],
     searched: false,
+    categoryShow: '',
   };
 
   componentDidMount() {
@@ -48,9 +49,15 @@ class Home extends React.Component {
     });
   };
 
+  categoryShow = () => {
+    let { categoryShow } = this.state;
+    categoryShow = categoryShow === 'category-show' ? '' : 'category-show';
+    this.setState({ categoryShow });
+  };
+
   render() {
     const { add2Cart } = this.props;
-    const { query, products, searched, categoryList } = this.state;
+    const { query, products, searched, categoryList, categoryShow } = this.state;
     return (
       <>
         <header className="header">
@@ -61,12 +68,14 @@ class Home extends React.Component {
           />
           <MsgBuscar
             query={ query }
+            categoryShow={ this.categoryShow }
           />
         </header>
         <main className="main container">
           <Categories
             handleClickRatio={ this.handleClickRatio }
             categoryList={ categoryList }
+            categoryShow={ categoryShow }
           />
           <ProductsList
             products={ products }

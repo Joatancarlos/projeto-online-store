@@ -5,6 +5,7 @@ export default class MsgBuscar extends Component {
   render() {
     const {
       query,
+      categoryShow,
     } = this.props;
     return (
       <div>
@@ -18,10 +19,18 @@ export default class MsgBuscar extends Component {
               </p>
             )
         }
+        <button className="category-btn" onClick={ () => categoryShow() }>
+          <span>Categorias </span>
+          <i className="fa-solid fa-arrow-right" />
+        </button>
       </div>
     );
   }
 }
+
+MsgBuscar.propTypes = {
+  categoryShow: PropTypes.func.isRequired,
+};
 
 MsgBuscar.propTypes = {
   query: PropTypes.string.isRequired,
