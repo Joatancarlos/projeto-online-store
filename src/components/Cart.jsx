@@ -13,7 +13,6 @@ class Cart extends React.Component {
 
   removeProduct = ({ target }) => {
     const { cart } = this.state;
-    console.log(target);
     const produtoById = cart.find((item) => item.product.id === target.id);
     const removeIndex = cart.indexOf(produtoById);
     cart.splice(removeIndex, 1);
