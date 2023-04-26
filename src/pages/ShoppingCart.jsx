@@ -7,12 +7,24 @@ import './Home.css';
 import './ShoppingCart.css';
 
 class ShoppingCart extends React.Component {
-  state = { cart: [] };
+  state = {
+    cart: [],
+  };
 
   componentDidMount() {
+    this.updateCart();
+  }
+
+  updateSize = () => {
+    // Atualiza o shoppingCart
+    this.updateCart();
+    this.forceUpdate();
+  };
+
+  updateCart = () => {
     const productsAdded = JSON.parse(localStorage.getItem('cart'));
     if (productsAdded !== null) this.setState({ cart: productsAdded });
-  }
+  };
 
   render() {
     const { cart } = this.state;
@@ -20,14 +32,14 @@ class ShoppingCart extends React.Component {
       <>
         <header className="header">
           {' '}
-          <Search />
+          <Search hiddenQuery />
         </header>
         <section className="shopping-cart">
           {
             cart.length > 0
               ? (
                 <>
-                  <Cart />
+                  <Cart updateSize={ this.updateSize } />
                   <Link
                     to="/checkout"
                     data-testid="checkout-products"

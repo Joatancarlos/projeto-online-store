@@ -6,9 +6,10 @@ export default class Categories extends Component {
     const {
       handleClickRatio,
       categoryList,
+      categoryShow,
     } = this.props;
     return (
-      <aside className="aside">
+      <aside className={ `aside ${categoryShow}` }>
         <ul className="list">
           <h2>Categorias:</h2>
           {
@@ -36,6 +37,10 @@ export default class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  categoryShow: PropTypes.func.isRequired,
+};
 
 Categories.propTypes = {
   handleClickRatio: PropTypes.func.isRequired,

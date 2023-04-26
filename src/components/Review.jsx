@@ -61,7 +61,7 @@ class ReviewForm extends React.Component {
     const reviews = JSON.parse(localStorage.getItem(`${productId}`));
     return (
       <form className="review">
-        <h3>De seu feeedback sobre o produto!</h3>
+        <h3>Dê seu feeedback sobre o produto!</h3>
         <TextField
           inputProps={ { 'data-testid': 'product-detail-email' } }
           type="email"

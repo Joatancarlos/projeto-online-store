@@ -59,7 +59,7 @@ class Checkout extends React.Component {
           <Search />
         </header>
         <section className="info container">
-          <div>
+          <div className="infos">
             <div className="person-info">
               <TextField
                 label="Nome completo"

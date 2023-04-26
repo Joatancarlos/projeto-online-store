@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Product from './Product';
 
 class Cart extends React.Component {
@@ -12,22 +13,27 @@ class Cart extends React.Component {
   }
 
   removeProduct = ({ target }) => {
+    const { updateSize } = this.props;
     const { cart } = this.state;
     const produtoById = cart.find((item) => item.product.id === target.id);
     const removeIndex = cart.indexOf(produtoById);
     cart.splice(removeIndex, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
+
     this.setState({ cart });
+    localStorage.setItem('cart', JSON.stringify(cart));
 
     let cartSize = 0;
     const cartSizeStorage = localStorage.getItem('cartSize');
     if (cartSizeStorage) cartSize = JSON.parse(cartSizeStorage);
     cartSize = cart.reduce((acc, cur) => cur.quantity + acc, 0);
+
     localStorage.setItem('cartSize', JSON.stringify(cartSize));
+    updateSize();
   };
 
   render() {
     const { cart } = this.state;
+    const { updateSize } = this.props;
     return (
       <div>
         {
@@ -35,6 +41,7 @@ class Cart extends React.Component {
             <Product
               product={ item }
               removeProduct={ this.removeProduct }
+              updateSize={ updateSize }
               key={ item.product.id }
             />
           )))
@@ -45,3 +52,7 @@ class Cart extends React.Component {
 }
 
 export default Cart;
+
+Cart.propTypes = {
+  updateSize: PropTypes.number.isRequired,
+};

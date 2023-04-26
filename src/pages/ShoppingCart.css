@@ -30,9 +30,59 @@
 
 .shopping-cart-product .title {
   width: 65%;
+  margin: 0 1vw;
 }
 
 .shopping-cart-product .price {
   text-align: center;
-  width: 15%;
+  display: flex;
+  align-items: center;
+  margin: 0 1.5vw;
+}
+
+@media screen and (max-width: 768px) {
+  .shopping-cart {
+    width: 98%;
+  }
+
+  .shopping-cart-product {
+    width: 100%;
+    margin: 3vw auto;
+    position: relative;
+  }
+
+  .shopping-cart-product * {
+    margin-right: 1vw;
+  }
+
+  .shopping-cart-product img {
+    width: 20%;
+  }
+
+  .shopping-cart-product .title {
+    margin: 2vw;
+  }
+
+  .shopping-cart-product .price {
+    justify-content: center;
+    margin: 1vw 1.5vw;
+  }
+
+  .responsive {
+    flex-direction: column-reverse;
+  }
+
+  .plus-and-less {
+    width: 100%;
+  }
+
+  .remove-product {
+    position: absolute;
+    top: -1.5vw;
+    right: -2vw;
+    color: red;
+    padding: 0;
+    background-color: transparent;
+    font-size: 1.5em;
+  }
 }
