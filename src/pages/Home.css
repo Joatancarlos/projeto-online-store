@@ -217,54 +217,41 @@ li {
 
 .plus-and-less {
   align-items: center;
-  background-color: #5697fa;
-  border: 1px solid white;
-  border-radius: 30px;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 5px;
   display: flex;
   justify-content: space-around;
   width: 120px;
 }
 
 .plus-and-less h4 {
-  color: white;
+  color: black;
 }
 
 .plus-and-less button {
-  background-color: transparent;
   border: none;
+  background-color: transparent;
   cursor: pointer;
   margin-top: 0;
 }
 
-.plus-and-less button:nth-child( 1 ) {
-  border-bottom-left-radius: 30px;
-  border-right: 1px solid black;
-  border-top-left-radius: 30px;
-}
-
-.plus-and-less button:nth-child( 3 ) {
-  border-bottom-right-radius: 30px;
-  border-left: 1px solid black;
-  border-top-right-radius: 30px;
-}
-
-.plus-and-less button:hover {
-  background-color: #77acfc;
-}
 
 .qtdBtn {
-  color: white;
   margin: auto;
   padding: 8px;
 }
 
 .remove-product {
-  background-color: transparent;
+  background-color: #a51010;
   border: none;
-  color: #a51010;
+  color: white;
   cursor: pointer;
   font-size: 1rem;
   position: relative;
+}
+
+.remove-product:hover {
+  background-color: #a51010be;
 }
 
 .empty-cart {

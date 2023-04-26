@@ -83,9 +83,9 @@ class Product extends React.Component {
           id={ id }
           onClick={ (event) => removeProduct(event) }
           data-testid="remove-product"
-          className="remove-product"
+          className="btn remove-product"
         >
-          <span id={ id }>Remover produto </span>
+          <span id={ id } />
           <i className="fa-solid fa-xmark" id={ id } />
         </button>
       </div>
