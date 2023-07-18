@@ -177,6 +177,7 @@ a {
   color: rgb(50 52 56);
   font-size: 1em;
   font-weight: 600;
+  overflow-y: hidden;
 }
 
 .product .price {
