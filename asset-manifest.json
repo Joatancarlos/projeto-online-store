@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/app-toot-name/static/css/main.fb76f8ad.css",
-    "main.js": "/app-toot-name/static/js/main.b61aed75.js",
-    "static/media/fa-solid-900.ttf": "/app-toot-name/static/media/fa-solid-900.4a2cd718d7031b732e76.ttf",
-    "static/media/fa-brands-400.ttf": "/app-toot-name/static/media/fa-brands-400.150de8eaa454d669c405.ttf",
-    "static/media/fa-solid-900.woff2": "/app-toot-name/static/media/fa-solid-900.bb975c966c37455a1bc3.woff2",
-    "static/media/fa-brands-400.woff2": "/app-toot-name/static/media/fa-brands-400.e033a13ee751afc1860c.woff2",
-    "static/media/emptyCart.png": "/app-toot-name/static/media/emptyCart.c3c82e49a7ec61f26c16.png",
-    "static/media/fa-regular-400.ttf": "/app-toot-name/static/media/fa-regular-400.d87474231f4192884802.ttf",
-    "static/media/fa-regular-400.woff2": "/app-toot-name/static/media/fa-regular-400.3223dc79c1adee56370b.woff2",
-    "static/media/fa-v4compatibility.ttf": "/app-toot-name/static/media/fa-v4compatibility.0e3a648be390bd8cb094.ttf",
-    "static/media/fa-v4compatibility.woff2": "/app-toot-name/static/media/fa-v4compatibility.68577e40f3e70067b5da.woff2",
-    "index.html": "/app-toot-name/index.html",
-    "main.fb76f8ad.css.map": "/app-toot-name/static/css/main.fb76f8ad.css.map",
-    "main.b61aed75.js.map": "/app-toot-name/static/js/main.b61aed75.js.map"
+    "main.css": "/projeto-online-store/static/css/main.0f9acf50.css",
+    "main.js": "/projeto-online-store/static/js/main.2beee750.js",
+    "static/media/fa-solid-900.ttf": "/projeto-online-store/static/media/fa-solid-900.4a2cd718d7031b732e76.ttf",
+    "static/media/fa-brands-400.ttf": "/projeto-online-store/static/media/fa-brands-400.150de8eaa454d669c405.ttf",
+    "static/media/fa-solid-900.woff2": "/projeto-online-store/static/media/fa-solid-900.bb975c966c37455a1bc3.woff2",
+    "static/media/fa-brands-400.woff2": "/projeto-online-store/static/media/fa-brands-400.e033a13ee751afc1860c.woff2",
+    "static/media/emptyCart.png": "/projeto-online-store/static/media/emptyCart.c3c82e49a7ec61f26c16.png",
+    "static/media/fa-regular-400.ttf": "/projeto-online-store/static/media/fa-regular-400.d87474231f4192884802.ttf",
+    "static/media/fa-regular-400.woff2": "/projeto-online-store/static/media/fa-regular-400.3223dc79c1adee56370b.woff2",
+    "static/media/fa-v4compatibility.ttf": "/projeto-online-store/static/media/fa-v4compatibility.0e3a648be390bd8cb094.ttf",
+    "static/media/fa-v4compatibility.woff2": "/projeto-online-store/static/media/fa-v4compatibility.68577e40f3e70067b5da.woff2",
+    "index.html": "/projeto-online-store/index.html",
+    "main.0f9acf50.css.map": "/projeto-online-store/static/css/main.0f9acf50.css.map",
+    "main.2beee750.js.map": "/projeto-online-store/static/js/main.2beee750.js.map"
   },
   "entrypoints": [
-    "static/css/main.fb76f8ad.css",
-    "static/js/main.b61aed75.js"
+    "static/css/main.0f9acf50.css",
+    "static/js/main.2beee750.js"
   ]
 }
